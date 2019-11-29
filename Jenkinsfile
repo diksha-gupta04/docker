@@ -5,7 +5,7 @@ node {
   }
   
   stage('Build image') {
-    app=docker.build("dock-image/latest")
+    app = docker build -t dock-image:latest .
   }
   
   stage('Test image') {
@@ -14,11 +14,6 @@ node {
     }
   }
   
-  stage('Push Image') {
-    docker.withRegistry('https://github.com/diksha-gupta04/docker.git', 'docker-hub-credentials') {
-      app.push("${env.BUILD_NUMBER}")
-      app.push("latest")
-    }
-  }
+ 
 }
   
