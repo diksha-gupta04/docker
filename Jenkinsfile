@@ -1,19 +1,20 @@
-node {
-  def app
-  stage('Clone repository') {
-    checkout scm
+pipeline {
+  
+  environment {
+    registry = diksha-gupta04/docker
+    registryCredentials = 'github'
   }
+  agent any
+  stages {
+  
   
   stage('Build image') {
-    app = docker build -t dock-image .
-  }
+    steps {
+      script {
+        docker.build regsirty + ":BUILD_NUMBER"
+      }}}
   
-  stage('Test image') {
-    app.inside {
-      sh 'echo "Tests passed"'
-    }
-  }
   
- 
+  }
 }
   
