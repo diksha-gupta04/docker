@@ -5,7 +5,7 @@ node {
   }
   
   stage('Build image') {
-    app = docker build -t dock-image:latest .
+    app = docker build -t dock-image .
   }
   
   stage('Test image') {
