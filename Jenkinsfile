@@ -11,6 +11,7 @@ node {
   stage('Test image') {
     app.inside {
       sh 'echo "Tests passed"'
+    }
   }
   
   stage('Push Image') {
