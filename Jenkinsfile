@@ -1,4 +1,8 @@
 pipeline {
+  environment {
+    registry = "dikshagupta04/docker-test"
+    registryCredential = ‘dockerhub’
+  }
   agent {
     dockerfile true
   }
@@ -9,19 +13,14 @@ pipeline {
         }
       }
       
-      stage('Build image') {
-        steps {
-        
+      stage('Building image') {
+      steps{
         script {
-            def customImage = docker.build("my-image:${env.BUILD_ID}")
-          
-          customImage.inside {
-        sh 'make test'
-          }
-       }
+          docker.build registry + ":$BUILD_NUMBER"
+        }
       }
-       }
-      }
-      }
+    }
+  }
+}
     
   
