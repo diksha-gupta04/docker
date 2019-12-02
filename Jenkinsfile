@@ -7,9 +7,9 @@ pipeline {
     dockerfile true
   }
     stages {
-      stage('Clone repository') {
+      stage('Cloning Git') {
         steps {
-        checkout scm
+          git 'https://github.com/diksha-gupta04/docker.git'
         }
       }
       
