@@ -7,18 +7,14 @@ pipeline {
         }
   }
     stages {
-      steps('Clone repository') {
+      stage('Clone repository') {
         checkout scm
       }
       
       stage('Build image') {
-        steps {
-          echo 'Starting to build docker image'
-          
-          script {
+        script {
             def customImage = docker.build("my-image:${env.BUILD_ID}")
-          }
-        }
+       }
       }
     }
         
