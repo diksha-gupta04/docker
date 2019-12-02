@@ -4,7 +4,9 @@ pipeline {
   }
     stages {
       stage('Clone repository') {
+        steps {
         echo "Hello world"
+        }
       }
       
     }
