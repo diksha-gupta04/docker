@@ -1,8 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    dockerfile true
+  }
     stages {
-      steps('Clone repository') {
-        checkout scm
+      stage('Clone repository') {
+        echo "Hello world"
       }
       
     }
