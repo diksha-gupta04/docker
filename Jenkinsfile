@@ -1,28 +1,8 @@
-pipeline {
+node('docker')
+ {
+	stage 'Checkout'
+		checkout scm
+	stage 'Build & Unittest'
+		sh "docker build -t myimage:B${BUILD_NUMBER} -f Dockerfile ."
+ }
  
-  agent {
-    dockerfile true
-  }
-    stages {
-      stage('Cloning Git') {
-        steps {
-          echo "Cloning Git"
-          git 'https://github.com/diksha-gupta04/docker.git'
-          echo "Cloning done!"
-        }
-      }
-      
-      stage('Building image') {
-      steps{
-        echo "Building image"
-        script {
-          def customImage = docker.build("my-image:${env.BUILD_ID}")
-        }
-        echo "Build the image!!"
-      }
-        
-    }
-  }
-}
-    
-  
