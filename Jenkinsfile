@@ -1,4 +1,8 @@
 pipeline {
+ environment {
+    registry = "dikshagupta04/docker-test"
+    registryCredential = 'dockerhub'
+  }
  
   agent {
     dockerfile true
@@ -22,6 +26,16 @@ pipeline {
       }
         
     }
+     
+     stage('Deploy Image') {
+      steps {
+       srcipt {
+        docker.withRegistry( '', registryCredential) {
+         dockerImage.push()
+        }
+       }
+      }
+     }
   }
 }
     
