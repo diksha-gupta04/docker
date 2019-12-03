@@ -24,16 +24,7 @@ pipeline {
       }
         
     }
-     
-     stage('Deploy Image') {
-      steps {
-       srcipt {
-        docker.withRegistry( '', registryCredential) {
-         dockerImage.push()
-        }
-       }
-      }
-     }
+   
   }
 }
     
