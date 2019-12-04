@@ -22,7 +22,7 @@ pipeline {
         }
         echo "Build the image!!"
       }
-        
+      }
     }
     
      
@@ -32,7 +32,7 @@ pipeline {
       }
      }
    
-  }
+  
 }
     
   
