@@ -24,14 +24,11 @@ pipeline {
       }
         
     }
+    
      
-      stage('Deploy Image') {
-      steps {
-       script {
-        docker.withRegistry( '', registryCredential) {
-         dockerImage.push()
-        }
-       }
+     post {
+      always {
+       emailext body: 'A Test Email', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequestRecipientProvider']], subject: 'Test'
       }
      }
    
