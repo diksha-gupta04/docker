@@ -27,8 +27,11 @@ pipeline {
     
      post {
       always {
-       emailext body: 'A Test Email', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-      }
+          step([$class: 'Mailer',
+            notifyEveryUnstableBuild: true,
+            recipients: "diksha2547@gmail.com",
+            sendToIndividuals: true])
+        }
      }
      
    
