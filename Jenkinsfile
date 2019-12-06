@@ -23,14 +23,16 @@ pipeline {
         echo "Build the image!!"
       }
       }
+     
+     
     }
     
      post {
       always {
-          step([$class: 'Mailer',
-            notifyEveryUnstableBuild: true,
-            recipients: "diksha2547@gmail.com",
-            sendToIndividuals: true])
+          emailext(body: '${DEFAULT_CONTENT}', mimeType: 'text/html',
+         replyTo: '$DEFAULT_REPLYTO', subject: '${DEFAULT_SUBJECT}',
+         to: emailextrecipients([[$class: 'CulpritsRecipientProvider'],
+                                 [$class: 'RequesterRecipientProvider']]))
         }
      }
      
