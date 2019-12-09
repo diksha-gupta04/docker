@@ -24,15 +24,23 @@ pipeline {
       }
       }
      
+     stage('Download') {
+      steps {
+       sh 'echo "arctifact file" > generatedFile.txt'
+      }
+     }
      
     }
     
      post {
       always {
-          emailext(body: '${DEFAULT_CONTENT}', mimeType: 'text/html',
-         replyTo: '$DEFAULT_REPLYTO', subject: '${DEFAULT_SUBJECT}',
-         to: emailextrecipients([[$class: 'CulpritsRecipientProvider'],
-                                 [$class: 'RequesterRecipientProvider']]))
+       archiveArtifacts artifacts: 'generatedFile.txt', onlyIfSuccess: true
+       echo 'I will always say Hello!'
+          emailext attachLog: true,
+           attachmentsPattern: 'generatedFile.txt'
+       body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+        recipientProviders: [developers(), requestor()],
+        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
         }
      }
      
