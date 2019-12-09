@@ -34,7 +34,7 @@ pipeline {
     
      post {
       always {
-       archiveArtifacts artifacts: 'generatedFile.txt', onlyIfSuccess: true
+       archiveArtifacts artifacts: 'generatedFile.txt', onlyIfSuccessful: true
        echo 'I will always say Hello!'
           emailext attachLog: true,
            attachmentsPattern: 'generatedFile.txt'
