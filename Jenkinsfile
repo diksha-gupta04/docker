@@ -30,20 +30,16 @@ pipeline {
       }
      }
      
+     stage('Email')
+        {
+        env.ForEmailPlugin = env.WORKSPACE
+        emailext mimeType: 'text/html',
+        body: '${FILE, path="myfile.html"}',
+        subject: currentBuild.currentResult + " : " + env.JOB_NAME,
+        to: 'diksha2547@gmail.com'
+        }   
     }
     
-     post {
-      always {
-       archiveArtifacts artifacts: 'generatedFile.txt', onlyIfSuccessful: true
-       echo 'I will always say Hello!'
-          emailext attachLog: true,
-           attachmentsPattern: 'generatedFile.txt'
-       body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-        recipientProviders: [developers(), requestor()],
-        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
-        }
-     }
-     
    
   
 }
