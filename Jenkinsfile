@@ -34,13 +34,15 @@ pipeline {
     
      post {
       always {
-       archiveArtifacts artifacts: 'generatedFile.txt', onlyIfSuccessful: true
+       archiveArtifacts artifacts: 'generatedFile.txt'
        echo 'I will always say Hello!'
           emailext attachLog: true,
            attachmentsPattern: 'generatedFile.txt'
        body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-        recipientProviders: [developers(), requestor()],
-        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+        recipientProviders: [[$class: 'DevelopersRecipientProvider'] , 
+                             $class: 'RequestorRecipientProvider']],
+        subject: "Jenkins Build: ${currentBuild.result}: Job ${env.JOB_NAME}"
+       to: 'diksha2547@gmail.com'
         }
      }
      
