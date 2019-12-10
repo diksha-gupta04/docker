@@ -36,9 +36,9 @@ pipeline {
     success {
       
       emailext (
-          subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-          body: """SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':\n
-            Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]""",
+         subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
           recipientProviders: [[$class: 'DevelopersRecipientProvider']],
        to: 'diksha2547@gmail.com'
         )
@@ -48,8 +48,8 @@ pipeline {
      
       emailext (
           subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-          body: """FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':\n
-            Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]""",
+          body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
           recipientProviders: [[$class: 'DevelopersRecipientProvider']],
        to: 'diksha2547@gmail.com'
         )
