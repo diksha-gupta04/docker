@@ -32,19 +32,27 @@ pipeline {
      
     }
     
-     post {
-      always {
-       archiveArtifacts artifacts: 'generatedFile.txt'
-       echo 'I will always say Hello!'
-          emailext attachLog: true,
-           attachmentsPattern: 'generatedFile.txt',
-       body: "${currentBuild.result}: Job ${env.JOB_NAME}- build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-        recipientProviders: [[$class: 'DevelopersRecipientProvider'] , 
-                             [$class: 'RequesterRecipientProvider']],
-        subject: "Jenkins Build: ${currentBuild.result}: Job ${env.JOB_NAME}",
-       to: 'diksha2547@gmail.com'
-        }
-     }
+    post {
+    success {
+      
+      emailext (
+          subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+          recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+        )
+    }
+
+    failure {
+     
+      emailext (
+          subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+          recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+        )
+    }
+  }
      
    
   
