@@ -39,7 +39,7 @@ pipeline {
       emailext (
        
          subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-          body:  '${FILE,path="index.html"}', 
+          body:  '${FILE,path="myfile.html"}', 
           recipientProviders: [[$class: 'DevelopersRecipientProvider']],
        to: 'diksha2547@gmail.com'
        
