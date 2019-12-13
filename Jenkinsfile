@@ -9,12 +9,13 @@ pipeline {
   agent any
  
     stages {
+     def stageName = ' '
         stage('Cloning Git') {
-         
+         stageName = 'Cloning Git'
          steps{
           
           echo "Cloning Git"
-          def stageName = 'Cloning Git'
+          
           script {
            try {
             git 'https://github.com/diksha-gupta04/docker.git'
@@ -30,10 +31,10 @@ pipeline {
          }
          
       stage('Building image') {
-       
+       stageName = 'Building image'
       steps{
         echo "Building image"
-       def stageName = 'Building image'
+       
         script {
          try {
           def customImage = docker.build("my-image:${env.BUILD_ID}")
