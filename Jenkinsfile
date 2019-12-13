@@ -15,11 +15,11 @@ pipeline {
           script {
            try {
             git 'https://github.com/diksha-gupta04/docker.git'
-          status1 = '${STAGE_NAME}: SUCCESS'
+          status1 = '$current_stage: SUCCESS'
           echo "Cloning done!"
            }
            catch(Exception e) {
-            status1 = '${STAGE_NAME} FAILURE' 
+            status1 = '$current_stage: FAILURE' 
          }
         
           }
@@ -32,11 +32,11 @@ pipeline {
         script {
          try {
           def customImage = docker.build("my-image:${env.BUILD_ID}")
-          status2 = '${STAGE_NAME} SUCCESS'
+          status2 = '$current_stage: SUCCESS'
           echo "Build the image!!"
         }
          catch(Exception e) {
-            status2 = '${STAGE_NAME} FAILURE' 
+            status2 = '$current_stage: FAILURE' 
          }
          
         
@@ -72,8 +72,8 @@ pipeline {
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
                 <p><i>(Build log is attached.)</i></p>  \n
-                <p>"stage 1(Cloning Git): ${status1}"</p> \n
-                <p>"stage 2(Building image): ${status2}"</p>""",
+                <p>${status1}</p> \n
+                <p>${status2}</p>""",
             
             to: 'diksha2547@gmail.com'
        
