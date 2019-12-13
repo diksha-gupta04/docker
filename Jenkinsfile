@@ -12,11 +12,11 @@ pipeline {
           script {
            try {
             git 'https://github.com/diksha-gupta04/docker.git'
-          def status1 = "SUCCESS"
+          def status1 = 'SUCCESS'
           echo "Cloning done!"
            }
            catch(Exception e) {
-            def status1 = "FAILURE" 
+            def status1 = 'FAILURE' 
          }
         
           }
