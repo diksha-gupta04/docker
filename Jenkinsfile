@@ -9,8 +9,14 @@ pipeline {
       stage('Cloning Git') {
         steps {
           echo "Cloning Git"
+         try {
           git 'https://github.com/diksha-gupta04/docker.git'
+          def status1 = "SUCCESS"
           echo "Cloning done!"
+         }
+         catch(Exception e) {
+            def status1 = "FAILURE" 
+         }
         }
       }
       
@@ -36,7 +42,8 @@ pipeline {
             subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
-                <p><i>(Build log is attached.)</i></p> """,
+                <p><i>(Build log is attached.)</i></p> \n
+                <p>stage 1: status1</p> """,
             
             to: 'diksha2547@gmail.com'
        
@@ -50,7 +57,8 @@ pipeline {
             subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
-                <p><i>(Build log is attached.)</i></p> """,
+                <p><i>(Build log is attached.)</i></p>  \n
+                <p>stage 1: status1</p> """,
             
             to: 'diksha2547@gmail.com'
        
