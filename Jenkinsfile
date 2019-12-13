@@ -1,3 +1,4 @@
+def status1 = 'SUCCESS'
 pipeline {
  environment {
     registry = "dikshagupta04/docker-test"
@@ -5,7 +6,7 @@ pipeline {
   }
  
   agent any
- def status1 = 'SUCCESS'
+ 
     stages {
         stage('Cloning Git') {
          steps{
