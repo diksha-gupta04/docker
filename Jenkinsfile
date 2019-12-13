@@ -1,4 +1,5 @@
 def status1 = 'FAILURE'
+def status2 = 'FAILURE'
 pipeline {
  environment {
     registry = "dikshagupta04/docker-test"
@@ -24,21 +25,25 @@ pipeline {
           }
          }
          }
-      
          
-      
-      
       stage('Building image') {
       steps{
         echo "Building image"
         script {
+         try {
           def customImage = docker.build("my-image:${env.BUILD_ID}")
+          status2 = 'SUCCESS'
+          echo "Build the image!!"
         }
-        echo "Build the image!!"
+         catch(Exception e) {
+            status2 = 'FAILURE' 
+         }
+         
+        
       }
       }
      
-    
+      }
     }
     
     post {
@@ -51,7 +56,8 @@ pipeline {
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
                 <p><i>(Build log is attached.)</i></p> \n
-                <p>"stage 1: ${status1}"</p> """,
+                <p>"stage 1: ${status1}"</p>\n
+                <p>"stage 2(Building image): ${status2}"</p> """,
             
             to: 'diksha2547@gmail.com'
        
@@ -66,7 +72,8 @@ pipeline {
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
                 <p><i>(Build log is attached.)</i></p>  \n
-                <p>"stage 1: ${status1}"</p> """,
+                <p>"stage 1(Cloning Git): ${status1}"</p> \n
+                <p>"stage 2(Building image): ${status2}"</p>""",
             
             to: 'diksha2547@gmail.com'
        
