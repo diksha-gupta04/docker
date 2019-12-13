@@ -1,4 +1,4 @@
-def status1 = 'SUCCESS'
+def status1 = 'FAILURE'
 pipeline {
  environment {
     registry = "dikshagupta04/docker-test"
