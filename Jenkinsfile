@@ -5,7 +5,7 @@ pipeline {
   }
  
   agent any
- def status1 = ' '
+ def status1 = 'SUCCESS'
     stages {
         stage('Cloning Git') {
          steps{
@@ -50,7 +50,7 @@ pipeline {
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
                 <p><i>(Build log is attached.)</i></p> \n
-                <p>stage 1: ${status1}</p> """,
+                <p>"stage 1: ${status1}"</p> """,
             
             to: 'diksha2547@gmail.com'
        
@@ -65,7 +65,7 @@ pipeline {
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
                 <p><i>(Build log is attached.)</i></p>  \n
-                <p>stage 1: ${status1}</p> """,
+                <p>"stage 1: ${status1}"</p> """,
             
             to: 'diksha2547@gmail.com'
        
