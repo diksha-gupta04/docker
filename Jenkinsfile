@@ -37,7 +37,7 @@ pipeline {
       always {
       
       emailext (
-       
+       attachLog: true,
          subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
           body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'
    </b></p><p>View console output at "<a href="${env.BUILD_URL}"> 
