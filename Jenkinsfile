@@ -10,8 +10,9 @@ pipeline {
  
     stages {
         stage('Cloning Git') {
+         def stageName = env.STAGE_NAME
          steps{
-          def stageName = env.STAGE_NAME
+          
           echo "Cloning Git"
           script {
            try {
