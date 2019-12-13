@@ -6,19 +6,20 @@ pipeline {
  
   agent any
     stages {
-      stage('Cloning Git') {
+      try {
+        stage('Cloning Git') {
         
           echo "Cloning Git"
-         try {
+        
           git 'https://github.com/diksha-gupta04/docker.git'
           def status1 = "SUCCESS"
           echo "Cloning done!"
-         }
+         }}
          catch(Exception e) {
             def status1 = "FAILURE" 
          }
         
-      }
+      
       
       stage('Building image') {
       steps{
