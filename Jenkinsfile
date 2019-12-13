@@ -6,17 +6,11 @@ pipeline {
     registry = "dikshagupta04/docker-test"
     registryCredential = 'dockerhub'
   }
- 
   agent any
- 
     stages {
-     
-        stage('Cloning Git') {
-         
-         steps{
-          
+        stage('Cloning Git') {  
+         steps{ 
           echo "Cloning Git"
-          
           script {
            stageName = 'Cloning Git'
            try {
