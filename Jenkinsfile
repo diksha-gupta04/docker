@@ -8,13 +8,16 @@ pipeline {
     stages {
       try {
         stage('Cloning Git') {
+         steps{
         
           echo "Cloning Git"
         
           git 'https://github.com/diksha-gupta04/docker.git'
           def status1 = "SUCCESS"
           echo "Cloning done!"
-         }}
+         }
+         }
+      }
          catch(Exception e) {
             def status1 = "FAILURE" 
          }
