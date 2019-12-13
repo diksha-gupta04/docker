@@ -18,7 +18,7 @@ pipeline {
       steps{
         echo "Building image"
         script {
-          def customImage = docker.build("my-image:${env.BUILD_ID})
+          def customImage = docker.build("my-image:${env.BUILD_ID}")
         }
         echo "Build the image!!"
       }
