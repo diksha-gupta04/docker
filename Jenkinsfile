@@ -11,15 +11,16 @@ pipeline {
     stages {
         stage('Cloning Git') {
          steps{
+          def stageName = env.STAGE_NAME
           echo "Cloning Git"
           script {
            try {
             git 'https://github.com/diksha-gupta04/docker.git'
-          status1 = '$current_stage: SUCCESS'
+          status1 = 'stageName: SUCCESS'
           echo "Cloning done!"
            }
            catch(Exception e) {
-            status1 = '$current_stage: FAILURE' 
+            status1 = 'stageName: FAILURE' 
          }
         
           }
