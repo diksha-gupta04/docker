@@ -1,5 +1,6 @@
 def status1 = 'FAILURE'
 def status2 = 'FAILURE'
+def stageName = ' '
 pipeline {
  environment {
     registry = "dikshagupta04/docker-test"
@@ -9,7 +10,7 @@ pipeline {
   agent any
  
     stages {
-     def stageName = ' '
+     
         stage('Cloning Git') {
          
          steps{
