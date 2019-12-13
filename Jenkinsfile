@@ -37,7 +37,7 @@ pipeline {
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
                 <p><i>(Build log is attached.)</i></p> """,
-            recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+            
             to: 'diksha2547@gmail.com'
        
         )
@@ -51,7 +51,7 @@ pipeline {
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
                 <p><i>(Build log is attached.)</i></p> """,
-            recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+            
             to: 'diksha2547@gmail.com'
        
         )
