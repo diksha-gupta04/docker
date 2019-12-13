@@ -30,8 +30,22 @@ pipeline {
     post {
      
       failure {
-      
-       emailext (
+       echo "Build Failure!!"
+         emailext (
+            attachLog: true,
+            subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+            body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
+                </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
+                <p><i>(Build log is attached.)</i></p> """,
+            recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+            to: 'diksha2547@gmail.com'
+       
+        )
+    }
+     
+      success {
+        echo "Build Success!!"
+         emailext (
             attachLog: true,
             subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
