@@ -34,11 +34,11 @@ pipeline {
     
     post {
      
-      success {
+      always {
       
       emailext (
        
-         subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+         subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
           body:  '${FILE,path="myfile.html"}', 
           recipientProviders: [[$class: 'DevelopersRecipientProvider']],
        to: 'diksha2547@gmail.com'
@@ -47,18 +47,7 @@ pipeline {
     }
 
    
-    failure {
-    
-      emailext (
-        
-          subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-          body: '${FILE,path="myfile.html"}', 
-          recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-       to: 'diksha2547@gmail.com'
-     
-        )
     }
-  }
      
    
   
