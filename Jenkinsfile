@@ -9,7 +9,7 @@ pipeline {
       stage('Cloning Git') {
         steps {
           echo "Cloning Git"
-          git 'https://github.com/diksha-gupta4/docker.git'
+          git 'https://github.com/diksha-gupta04/docker.git'
           echo "Cloning done!"
         }
       }
