@@ -10,18 +10,18 @@ pipeline {
  
     stages {
         stage('Cloning Git') {
-         def stageName = env.STAGE_NAME
+         def stageName = 'Cloning Git'
          steps{
           
           echo "Cloning Git"
           script {
            try {
             git 'https://github.com/diksha-gupta04/docker.git'
-          status1 = 'stageName: SUCCESS'
+            status1 = '${stageName}: SUCCESS'
           echo "Cloning done!"
            }
            catch(Exception e) {
-            status1 = 'stageName: FAILURE' 
+            status1 = '${stageName}: FAILURE' 
          }
         
           }
@@ -29,16 +29,17 @@ pipeline {
          }
          
       stage('Building image') {
+       def stageName = 'Building image'
       steps{
         echo "Building image"
         script {
          try {
           def customImage = docker.build("my-image:${env.BUILD_ID}")
-          status2 = '$current_stage: SUCCESS'
+          status2 = '${stageName}: SUCCESS'
           echo "Build the image!!"
         }
          catch(Exception e) {
-            status2 = '$current_stage: FAILURE' 
+            status2 = '${stageName}: FAILURE' 
          }
          
         
