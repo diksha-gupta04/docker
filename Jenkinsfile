@@ -1,5 +1,5 @@
-def status1 = 'FAILURE'
-def status2 = 'FAILURE'
+def status1 = 'SUCCESS'
+def status2 = 'SUCCESS'
 def stageName = ' '
 pipeline {
  environment {
