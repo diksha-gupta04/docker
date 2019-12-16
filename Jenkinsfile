@@ -55,6 +55,14 @@ pipeline {
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
                 <p><i>(Build log is attached.)</i></p> \n
+                <style>
+                 table, th, td {
+                   border: 1px solid orange;
+                 }
+                 th, td {
+                   padding: 10px;
+                 }
+               </style>
                 <table style="width:100%">
                 <th>
                 <td>${status1}</td>
