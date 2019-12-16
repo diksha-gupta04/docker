@@ -40,8 +40,6 @@ pipeline {
         }
          catch(Exception e) {
             status2 = stageName+': FAILURE'
-         
-        
       }
       }
      
@@ -50,38 +48,26 @@ pipeline {
     }
     
     post {
-     
-      failure {
-       echo "Build Failure!!"
+      always {
          emailext (
             attachLog: true,
             subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
             body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
                 </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
                 <p><i>(Build log is attached.)</i></p> \n
-                <p>${status1}</p>\n
-                <p>${status2}</p> """,
+                <table>
+                <th>
+                <td>${status1}</td>
+                <td>${status2}</td>
+                </th>
+                </table>""",
             
             to: 'diksha2547@gmail.com'
        
         )
     }
      
-      success {
-        echo "Build Success!!"
-         emailext (
-            attachLog: true,
-            subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-            body: """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER}\'
-                </b></p><p>View console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
-                <p><i>(Build log is attached.)</i></p>  \n
-                <p>${status1}</p> \n
-                <p>${status2}</p>""",
-            
-            to: 'diksha2547@gmail.com'
-       
-        )
-    }
+      
     }
 }
     
